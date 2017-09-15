@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Cryptocurrency;
+use App\Jobs\NewAPICall;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class CryptocurrencyController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
+     * @param Request $request
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->middleware('auth');
+        $this->dispatch(new NewAPICall($request->header('Api-Token'), $request->path(), Carbon::now()));
     }
 
     /**
@@ -31,7 +35,7 @@ class CryptocurrencyController extends Controller
      */
     public function get($symbol)
     {
-        $cryptocurrency = Cryptocurrency::where('symbol', $symbol)->first();
+        $cryptocurrency = Cryptocurrency::where('symbol', $symbol)->firstOrFail();
 
         return response()->json($cryptocurrency);
     }

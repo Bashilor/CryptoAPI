@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Cryptocurrency;
 
-class APIController extends Controller
+class CryptocurrencyController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -20,19 +20,19 @@ class APIController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $cryptocurrencies = Cryptocurrency::all();
 
-        return response()->json($users);
+        return response()->json($cryptocurrencies);
     }
 
     /**
-     * @param $id
+     * @param $symbol
      * @return \Illuminate\Http\JsonResponse
      */
-    public function get($id)
+    public function get($symbol)
     {
-        $user = User::findOrFail($id);
+        $cryptocurrency = Cryptocurrency::where('symbol', $symbol)->first();
 
-        return response()->json($user);
+        return response()->json($cryptocurrency);
     }
 }

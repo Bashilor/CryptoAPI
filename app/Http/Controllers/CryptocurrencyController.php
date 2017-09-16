@@ -33,7 +33,7 @@ class CryptocurrencyController extends Controller
 
     /**
      * @usage : /api/v1/cryptocurrency/BTC
-     * 
+     *
      * @param $symbol
      * @return \Illuminate\Http\JsonResponse
      */

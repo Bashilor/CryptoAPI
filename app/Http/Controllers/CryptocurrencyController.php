@@ -47,12 +47,12 @@ class CryptocurrencyController extends Controller
     /**
      * @usage : /api/v1/cryptocurrency/list/BTC-DASH
      *
-     * @param $symbol
+     * @param $symbols
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getlist($symbol)
+    public function getlist($symbols)
     {
-        $symbols = explode('-', $symbol);
+        $symbols = explode('-', $symbols);
 
         $cryptocurrencies = [];
         foreach ($symbols as $symbol)

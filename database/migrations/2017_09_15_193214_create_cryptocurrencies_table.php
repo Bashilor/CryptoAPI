@@ -25,6 +25,7 @@ class CreateCryptocurrenciesTable extends Migration
             $table->string('block_explorer');
             $table->string('tx_explorer');
             $table->string('uri');
+            $table->boolean('maintenance')->default(false);
             $table->timestamps();
         });
     }

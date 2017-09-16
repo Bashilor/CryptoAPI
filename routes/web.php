@@ -17,7 +17,7 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api/v1'], function($app)
 {
-    $app->get('cryptocurrency','CryptocurrencyController@index');
+    $app->get('cryptocurrency/','CryptocurrencyController@index');
 
     $app->get('cryptocurrency/{symbol}','CryptocurrencyController@get');
 

@@ -22,7 +22,10 @@ class CryptocurrencyTableSeeder extends Seeder
                 'confirmations'     =>  6,
                 'block_explorer'    =>  'https://blockchain.info',
                 'tx_explorer'       =>  'https://blockchain.info/en/tx/',
-                'uri'               =>  'bitcoin'
+                'uri'               =>  'bitcoin',
+                'wallet_port'       =>  8332,
+                'created_at'        =>  Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'        =>  Carbon::now()->format('Y-m-d H:i:s')
             ),
             array(
                 'name'              =>  'Litecoin',
@@ -33,7 +36,10 @@ class CryptocurrencyTableSeeder extends Seeder
                 'confirmations'     =>  6,
                 'block_explorer'    =>  'https://live.blockcypher.com/ltc',
                 'tx_explorer'       =>  'https://live.blockcypher.com/ltc/tx/',
-                'uri'               =>  'litecoin'
+                'uri'               =>  'litecoin',
+                'wallet_port'       =>  9332,
+                'created_at'        =>  Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'        =>  Carbon::now()->format('Y-m-d H:i:s')
             ),
             array(
                 'name'              =>  'Dash',
@@ -44,7 +50,10 @@ class CryptocurrencyTableSeeder extends Seeder
                 'confirmations'     =>  6,
                 'block_explorer'    =>  'https://explorer.dash.org',
                 'tx_explorer'       =>  'https://explorer.dash.org/tx/',
-                'uri'               =>  'dash'
+                'uri'               =>  'dash',
+                'wallet_port'       =>  9998,
+                'created_at'        =>  Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'        =>  Carbon::now()->format('Y-m-d H:i:s')
             ),
             array(
                 'name'              =>  'PIVX',
@@ -55,7 +64,10 @@ class CryptocurrencyTableSeeder extends Seeder
                 'confirmations'     =>  6,
                 'block_explorer'    =>  'http://pivxscan.io',
                 'tx_explorer'       =>  'http://pivxscan.io/tx/',
-                'uri'               =>  'pivx'
+                'uri'               =>  'pivx',
+                'wallet_port'       =>  51473,
+                'created_at'        =>  Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'        =>  Carbon::now()->format('Y-m-d H:i:s')
             ),
             array(
                 'name'              =>  'Nexus',
@@ -66,7 +78,10 @@ class CryptocurrencyTableSeeder extends Seeder
                 'confirmations'     =>  6,
                 'block_explorer'    =>  'http://nxs.efficienthash.com',
                 'tx_explorer'       =>  'http://nxs.efficienthash.com/txes/',
-                'uri'               =>  'nexus'
+                'uri'               =>  'nexus',
+                'wallet_port'       =>  10050,
+                'created_at'        =>  Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'        =>  Carbon::now()->format('Y-m-d H:i:s')
             ),
             array(
                 'name'              =>  'Dogecoin',
@@ -77,7 +92,10 @@ class CryptocurrencyTableSeeder extends Seeder
                 'confirmations'     =>  3,
                 'block_explorer'    =>  'https://dogechain.info',
                 'tx_explorer'       =>  'https://dogechain.info/tx/',
-                'uri'               =>  'dogecoin'
+                'uri'               =>  'dogecoin',
+                'wallet_port'       =>  22555,
+                'created_at'        =>  Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'        =>  Carbon::now()->format('Y-m-d H:i:s')
             )
         ));
     }

@@ -13,8 +13,7 @@ class LastBlockUpdate extends Command
     private $wallet_password;
     private $wallet_ip_address;
 
-    private $btc_wallet_port;
-    private $ltc_wallet_port;
+    private $wallet_ports;
 
     /**
      * The name and signature of the console command.
@@ -43,8 +42,11 @@ class LastBlockUpdate extends Command
         $this->wallet_password       = env('WALLET_PASSWORD');
         $this->wallet_ip_address     = env('WALLET_IP_ADDRESS');
 
-        $this->btc_wallet_port       = env('BTC_WALLET_PORT');
-        $this->ltc_wallet_port       = env('LTC_WALLET_PORT');
+        $cryptocurrencies = Cryptocurrency::where('maintenance', false)->get();
+        foreach ($cryptocurrencies as $cryptocurrency)
+        {
+            $this->wallet_ports[$cryptocurrency->symbol] = $cryptocurrency->wallet_port;
+        }
     }
 
     /**
@@ -57,7 +59,7 @@ class LastBlockUpdate extends Command
         $cryptocurrencies = Cryptocurrency::where('maintenance', false)->get();
         foreach ($cryptocurrencies as $cryptocurrency)
         {
-            $wallet_uri = 'http://'. $this->wallet_username .':'. $this->wallet_password .'@'. $this->wallet_ipaddress .':'. $this->{strtolower($cryptocurrency->symbol).'_wallet_port'} .'/';
+            $wallet_uri = 'http://'. $this->wallet_username .':'. $this->wallet_password .'@'. $this->wallet_ip_address .':'. $this->wallet_ports[$cryptocurrency->symbol] .'/';
 
             $client = new Client($wallet_uri);
 

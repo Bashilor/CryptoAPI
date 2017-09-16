@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\LastBlockUpdate'
+        'App\Console\Commands\LastBlockUpdate',
+        'App\Console\Commands\LastPrice'
     ];
 
     /**
@@ -25,5 +26,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('cryptos:lastblockupdate')->everyMinute();
+        $schedule->command('cryptos:lastprice')->everyMinute();
     }
 }

@@ -20,6 +20,8 @@ class CryptocurrencyController extends Controller
     }
 
     /**
+     * @usage : /api/v1/cryptocurrency
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
@@ -30,6 +32,8 @@ class CryptocurrencyController extends Controller
     }
 
     /**
+     * @usage : /api/v1/cryptocurrency/BTC
+     * 
      * @param $symbol
      * @return \Illuminate\Http\JsonResponse
      */
@@ -38,5 +42,24 @@ class CryptocurrencyController extends Controller
         $cryptocurrency = Cryptocurrency::where('symbol', $symbol)->firstOrFail();
 
         return response()->json($cryptocurrency);
+    }
+
+    /**
+     * @usage : /api/v1/cryptocurrency/list/BTC-DASH
+     *
+     * @param $symbol
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getlist($symbol)
+    {
+        $symbols = explode('-', $symbol);
+
+        $cryptocurrencies = [];
+        foreach ($symbols as $symbol)
+        {
+            $cryptocurrencies[] = Cryptocurrency::where('symbol', $symbol)->first();
+        }
+
+        return response()->json($cryptocurrencies);
     }
 }

@@ -20,4 +20,6 @@ $router->group(['prefix' => 'api/v1'], function($app)
     $app->get('cryptocurrency','CryptocurrencyController@index');
 
     $app->get('cryptocurrency/{symbol}','CryptocurrencyController@get');
+
+    $app->get('cryptocurrency/list/{symbols}','CryptocurrencyController@getlist');
 });

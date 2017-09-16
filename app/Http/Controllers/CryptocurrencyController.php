@@ -57,7 +57,7 @@ class CryptocurrencyController extends Controller
         $cryptocurrencies = [];
         foreach ($symbols as $symbol)
         {
-            $cryptocurrencies[] = Cryptocurrency::where('symbol', $symbol)->first();
+            $cryptocurrencies[] = Cryptocurrency::where('symbol', $symbol)->firstOrFail();
         }
 
         return response()->json($cryptocurrencies);

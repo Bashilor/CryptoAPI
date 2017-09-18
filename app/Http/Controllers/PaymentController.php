@@ -31,6 +31,11 @@ class PaymentController extends Controller
         $this->wallet_ip_address     = env('WALLET_IP_ADDRESS');
     }
 
+    /**
+     * @param $cryptocurrency
+     * @param $uuid
+     * @return mixed
+     */
     public function getNewAddress($cryptocurrency, $uuid)
     {
         $wallet_uri = 'http://'. $this->wallet_username .':'. $this->wallet_password .'@'. $this->wallet_ip_address .':'. $cryptocurrency->wallet_port .'/';

@@ -27,5 +27,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('cryptos:lastblockupdate')->everyMinute();
         $schedule->command('cryptos:lastprice')->everyMinute();
+
+        $schedule->command('api:paymentstatus')->everyMinute();
     }
 }

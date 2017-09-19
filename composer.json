@@ -9,13 +9,13 @@
         "laravel/lumen-framework": "5.5.*",
         "vlucas/phpdotenv": "~2.2",
         "jsonrpc/jsonrpc": "^1.0",
-        "webpatser/laravel-uuid": "^3.0"
+        "webpatser/laravel-uuid": "^3.0",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "phpunit/phpunit": "~6.0",
-        "mockery/mockery": "~0.9",
-        "guzzlehttp/guzzle": "^6.3"
+        "mockery/mockery": "~0.9"
     },
     "autoload": {
         "psr-4": {

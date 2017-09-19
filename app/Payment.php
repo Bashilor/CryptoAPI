@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\PaymentSuccessful;
 use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
@@ -12,6 +13,15 @@ class Payment extends Model
      * @var string
      */
     protected $table = 'payments';
+
+    /**
+     * The events associated with the model.
+     *
+     * @var array
+     */
+    protected $events =[
+        'updated' => PaymentSuccessful::class
+    ];
 
     /**
      * The attributes that are mass assignable.

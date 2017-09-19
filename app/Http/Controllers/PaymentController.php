@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cryptocurrency;
 use App\Payment;
 use App\Jobs\NewAPICall;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -74,6 +75,7 @@ class PaymentController extends Controller
 
         $payment = new Payment();
 
+        $payment->user_id = User::where('api_token', $request->header('Api-Token'))->first()->id;
         $payment->uuid = $uuid;
         $payment->payment_address = $payment_address;
         $payment->amount = $body->amount;

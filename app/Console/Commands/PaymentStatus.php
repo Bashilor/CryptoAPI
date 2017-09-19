@@ -70,7 +70,7 @@ class PaymentStatus extends Command
                     $payment->status = 2;
                     $payment->save();
 
-                    // event(new PaymentSuccessful($payment));
+                    event(new PaymentSuccessful($payment));
                 }
             }
         }

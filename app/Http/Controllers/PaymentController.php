@@ -25,7 +25,9 @@ class PaymentController extends Controller
     public function __construct(Request $request)
     {
         $this->middleware('auth');
-        $this->dispatch(new NewAPICall($request->header('Api-Token'), $request->path(), Carbon::now()));
+
+        $apiCall = (new NewAPICall($request->header('Api-Token'), $request->path(), Carbon::now()))->onQueue('api');
+        $this->dispatch($apiCall);
 
         $this->wallet_username       = env('WALLET_USERNAME');
         $this->wallet_password       = env('WALLET_PASSWORD');

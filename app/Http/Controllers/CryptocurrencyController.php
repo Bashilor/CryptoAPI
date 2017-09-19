@@ -16,7 +16,9 @@ class CryptocurrencyController extends Controller
     public function __construct(Request $request)
     {
         $this->middleware('auth');
-        $this->dispatch(new NewAPICall($request->header('Api-Token'), $request->path(), Carbon::now()));
+
+        $apiCall = (new NewAPICall($request->header('Api-Token'), $request->path(), Carbon::now()))->onQueue('api');
+        $this->dispatch($apiCall);
     }
 
     /**

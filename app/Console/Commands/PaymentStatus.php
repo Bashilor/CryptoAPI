@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Cryptocurrency;
-use App\Events\PaymentSuccessful;
+use App\Jobs\SendPaymentNotification;
 use App\Payment;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
@@ -70,7 +70,8 @@ class PaymentStatus extends Command
                     $payment->status = 2;
                     $payment->save();
 
-                    event(new PaymentSuccessful($payment));
+                    $paymentNotification = (new SendPaymentNotification($payment))->onQueue('payment');
+                    $this->dispatch($paymentNotification);
                 }
             }
         }

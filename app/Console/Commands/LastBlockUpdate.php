@@ -64,7 +64,14 @@ class LastBlockUpdate extends Command
             $client->call('getblock', [$blockHash]);
             $lastBlock = json_decode($client->output)->result->time;
 
-            $lastBlockUpdate = Carbon::createFromTimestamp($lastBlock)->toDateTimeString();
+            if($cryptocurrency->symbol == "NXS")
+            {
+                $lastBlockUpdate = Carbon::parse($lastBlock)->toDateTimeString();
+            }
+            else
+            {
+                $lastBlockUpdate = Carbon::createFromTimestamp($lastBlock)->toDateTimeString();
+            }
 
             $cryptocurrency->last_block_update = $lastBlockUpdate;
             $cryptocurrency->save();

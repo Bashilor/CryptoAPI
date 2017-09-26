@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('api_token', 60)->unique();
             $table->string('webhook_token', 50)->unique();
             $table->string('website_url', 255);
+            $table->string('custom_uri', 255);
             $table->timestamps();
         });
     }

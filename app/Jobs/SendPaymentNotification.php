@@ -30,11 +30,11 @@ class SendPaymentNotification implements ShouldQueue
      */
     public function handle()
     {
-        $user = User::where('id', $this->payment->user_id)->first();
+        $user = User::find($this->payment->user_id);
 
         $client = new Client();
 
-        $client->request('POST', $user->website_url . '/cryptoapi/payment', [
+        $client->request('POST', $user->website_url . '/' . $user->custom_uri, [
             'headers' => [
                 'Webhook-Token' => $user->webhook_token
             ],

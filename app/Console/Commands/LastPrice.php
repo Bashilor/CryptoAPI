@@ -44,7 +44,8 @@ class LastPrice extends Command
 
         $response = json_decode($response->getBody()->getContents(), true);
 
-        $btcPrice = str_replace(',', '', $response["bpi"]["USD"]["rate"]);
+        $btcPrice_usd = str_replace(',', '', $response["bpi"]["USD"]["rate"]);
+        $btcPrice_eur = str_replace(',', '', $response["bpi"]["EUR"]["rate"]);
 
         $cryptocurrencies = Cryptocurrency::where('maintenance', false)->get();
         foreach ($cryptocurrencies as $cryptocurrency)
@@ -60,13 +61,15 @@ class LastPrice extends Command
 
                 $lastPrice = number_format($response["result"][0]["Last"], 8);
 
-                $cryptocurrency->last_usd_price = number_format($lastPrice * $btcPrice, 8);
+                $cryptocurrency->last_usd_price = number_format($lastPrice * $btcPrice_usd, 8);
+                $cryptocurrency->last_eur_price = number_format($lastPrice * $btcPrice_eur, 8);
                 $cryptocurrency->last_btc_price = $lastPrice;
                 $cryptocurrency->save();
             }
             else
             {
-                $cryptocurrency->last_usd_price = $btcPrice;
+                $cryptocurrency->last_usd_price = $btcPrice_usd;
+                $cryptocurrency->last_eur_price = $btcPrice_eur;
                 $cryptocurrency->last_btc_price = 1;
                 $cryptocurrency->save();
             }

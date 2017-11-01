@@ -16,6 +16,7 @@ class CryptocurrencyTableSeeder extends Seeder
             array(
                 'name'              =>  'Bitcoin',
                 'symbol'            =>  'BTC',
+                'type'              =>  'BITCOIN',
                 'logo_url'          =>  'https://i.imgur.com/5i4e1Vi.png',
                 'confirmations'     =>  6,
                 'block_explorer'    =>  'https://blockchain.info',
@@ -28,6 +29,7 @@ class CryptocurrencyTableSeeder extends Seeder
             array(
                 'name'              =>  'Litecoin',
                 'symbol'            =>  'LTC',
+                'type'              =>  'BITCOIN',
                 'logo_url'          =>  'https://i.imgur.com/R29q3dD.png',
                 'confirmations'     =>  6,
                 'block_explorer'    =>  'https://live.blockcypher.com/ltc',
@@ -40,6 +42,7 @@ class CryptocurrencyTableSeeder extends Seeder
             array(
                 'name'              =>  'Dash',
                 'symbol'            =>  'DASH',
+                'type'              =>  'BITCOIN',
                 'logo_url'          =>  'https://i.imgur.com/qiIMHZr.png',
                 'confirmations'     =>  6,
                 'block_explorer'    =>  'https://explorer.dash.org',
@@ -52,6 +55,7 @@ class CryptocurrencyTableSeeder extends Seeder
             array(
                 'name'              =>  'PIVX',
                 'symbol'            =>  'PIVX',
+                'type'              =>  'BITCOIN',
                 'logo_url'          =>  'https://i.imgur.com/c689IAo.png',
                 'confirmations'     =>  6,
                 'block_explorer'    =>  'http://pivxscan.io',
@@ -64,6 +68,7 @@ class CryptocurrencyTableSeeder extends Seeder
             array(
                 'name'              =>  'Nexus',
                 'symbol'            =>  'NXS',
+                'type'              =>  'BITCOIN',
                 'logo_url'          =>  'https://i.imgur.com/Sf3N92M.png',
                 'confirmations'     =>  6,
                 'block_explorer'    =>  'http://nxs.efficienthash.com',
@@ -76,6 +81,7 @@ class CryptocurrencyTableSeeder extends Seeder
             array(
                 'name'              =>  'Dogecoin',
                 'symbol'            =>  'DOGE',
+                'type'              =>  'BITCOIN',
                 'logo_url'          =>  'https://i.imgur.com/e1RS4Hn.png',
                 'confirmations'     =>  3,
                 'block_explorer'    =>  'https://dogechain.info',

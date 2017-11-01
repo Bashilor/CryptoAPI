@@ -96,8 +96,6 @@ class CryptocurrencyTableSeeder extends Seeder
                 'symbol'            =>  'ZEC',
                 'type'              =>  'BITCOINEX',
                 'logo_url'          =>  'https://i.imgur.com/hIzaEcO.png',
-                'last_usd_price'    =>  0,
-                'last_btc_price'    =>  0,
                 'confirmations'     =>  20,
                 'block_explorer'    =>  'https://explorer.zcha.in',
                 'tx_explorer'       =>  'https://explorer.zcha.in/transactions/',

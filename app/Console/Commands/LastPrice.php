@@ -61,8 +61,8 @@ class LastPrice extends Command
 
                 $lastPrice = number_format($response["result"][0]["Last"], 8);
 
-                $cryptocurrency->last_usd_price = number_format($lastPrice * $btcPrice_usd, 8);
-                $cryptocurrency->last_eur_price = number_format($lastPrice * $btcPrice_eur, 8);
+                $cryptocurrency->last_usd_price = number_format($lastPrice * $btcPrice_usd, 2);
+                $cryptocurrency->last_eur_price = number_format($lastPrice * $btcPrice_eur, 2);
                 $cryptocurrency->last_btc_price = $lastPrice;
                 $cryptocurrency->save();
             }

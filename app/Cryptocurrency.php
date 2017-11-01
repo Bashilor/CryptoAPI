@@ -19,7 +19,7 @@ class Cryptocurrency extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'symbol', 'logo_url', 'last_block_update', 'last_btc_price', 'last_usd_price', 'last_eur_price', 'confirmations', 'block_explorer', 'tx_explorer', 'uri'
+        'name', 'symbol', 'logo_url', 'last_block_update', 'last_btc_price', 'last_usd_price', 'last_eur_price', 'confirmations', 'block_explorer', 'tx_explorer', 'uri', 'maintenance', 'wallet_port'
     ];
 
     /**

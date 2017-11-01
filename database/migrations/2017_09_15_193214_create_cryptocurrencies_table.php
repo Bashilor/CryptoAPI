@@ -17,6 +17,7 @@ class CreateCryptocurrenciesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('symbol', 5);
+            $table->string('type');
             $table->string('logo_url');
             $table->timestamp('last_block_update')->useCurrent();
             $table->decimal('last_btc_price', 16, 8)->default(0);

@@ -42,11 +42,18 @@ class PaymentController extends Controller
     public function getNewAddress($cryptocurrency, $uuid)
     {
         $wallet_uri = 'http://'. $this->wallet_username .':'. $this->wallet_password .'@'. $this->wallet_ip_address .':'. $cryptocurrency->wallet_port .'/';
-
         $client = new Client($wallet_uri);
 
-        $client->call('getnewaddress', [$uuid]);
-        $newAddress = json_decode($client->output)->result;
+        if($cryptocurrency->type == 'BITCOIN')
+        {
+            $client->call('getnewaddress', [$uuid]);
+            $newAddress = json_decode($client->output)->result;
+        }
+        elseif ($cryptocurrency->type == 'BITCOINEX')
+        {
+            $client->call('getnewaddress', []);
+            $newAddress = json_decode($client->output)->result;
+        }
 
         return $newAddress;
     }

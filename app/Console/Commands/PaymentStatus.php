@@ -62,8 +62,16 @@ class PaymentStatus extends Command
 
             foreach ($payments as $payment)
             {
-                $client->call('getbalance', [$payment->uuid, $cryptocurrency->confirmations]);
-                $balance = json_decode($client->output)->result;
+                if($cryptocurrency->type == 'BITCOIN')
+                {
+                    $client->call('getbalance', [$payment->uuid, $cryptocurrency->confirmations]);
+                    $balance = json_decode($client->output)->result;
+                }
+                elseif ($cryptocurrency->type == 'BITCOINEX')
+                {
+                    $client->call('z_getbalance', [$payment->payment_address, $cryptocurrency->confirmations]);
+                    $balance = json_decode($client->output)->result;
+                }
 
                 if ($balance == $payment->amount)
                 {

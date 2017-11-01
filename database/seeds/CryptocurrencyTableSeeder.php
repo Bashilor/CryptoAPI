@@ -84,6 +84,21 @@ class CryptocurrencyTableSeeder extends Seeder
                 'wallet_port'       =>  22555,
                 'created_at'        =>  Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'        =>  Carbon::now()->format('Y-m-d H:i:s')
+            ),
+            array(
+                'name'              =>  'ZCash',
+                'symbol'            =>  'ZEC',
+                'type'              =>  'BITCOINEX',
+                'logo_url'          =>  'https://i.imgur.com/hIzaEcO.png',
+                'last_usd_price'    =>  0,
+                'last_btc_price'    =>  0,
+                'confirmations'     =>  20,
+                'block_explorer'    =>  'https://explorer.zcha.in',
+                'tx_explorer'       =>  'https://explorer.zcha.in/transactions/',
+                'uri'               =>  '',
+                'wallet_port'       =>  8232,
+                'created_at'        =>  Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'        =>  Carbon::now()->format('Y-m-d H:i:s')
             )
         ));
     }

@@ -52,26 +52,23 @@ class LastBlockUpdate extends Command
         foreach ($cryptocurrencies as $cryptocurrency)
         {
             $wallet_uri = 'http://'. $this->wallet_username .':'. $this->wallet_password .'@'. $this->wallet_ip_address .':'. $cryptocurrency->wallet_port .'/';
-
             $client = new Client($wallet_uri);
 
-            $client->call('getblockcount', []);
-            $getBlockCount = json_decode($client->output)->result;
-
-            $client->call('getblockhash', [$getBlockCount]);
-            $blockHash = json_decode($client->output)->result;
-
-            $client->call('getblock', [$blockHash]);
-            $lastBlock = json_decode($client->output)->result->time;
-
-            if($cryptocurrency->symbol == "NXS")
+            if($cryptocurrency->type == 'BITCOIN' || $cryptocurrency->type == 'BITCOINEX')
             {
-                $lastBlockUpdate = Carbon::parse($lastBlock)->toDateTimeString();
+                $client->call('getblockcount', []);
+                $getBlockCount = json_decode($client->output)->result;
+
+                $client->call('getblockhash', [$getBlockCount]);
+                $blockHash = json_decode($client->output)->result;
+
+                $client->call('getblock', [$blockHash]);
+                $lastBlock = json_decode($client->output)->result->time;
             }
-            else
-            {
-                $lastBlockUpdate = Carbon::createFromTimestamp($lastBlock)->toDateTimeString();
-            }
+
+            $cryptocurrency->symbol == "NXS"
+                ? $lastBlockUpdate = Carbon::parse($lastBlock)->toDateTimeString()
+                : $lastBlockUpdate = Carbon::createFromTimestamp($lastBlock)->toDateTimeString();
 
             $cryptocurrency->last_block_update = $lastBlockUpdate;
             $cryptocurrency->save();

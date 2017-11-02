@@ -40,12 +40,12 @@ class LastPrice extends Command
     public function handle()
     {
         $client = new Client();
-        $response = $client->get('https://api.coindesk.com/v1/bpi/currentprice.json');
+        $response = $client->get('https://blockchain.info/fr/ticker');
 
         $response = json_decode($response->getBody()->getContents(), true);
 
-        $btcPrice_usd = str_replace(',', '', $response["bpi"]["USD"]["rate"]);
-        $btcPrice_eur = str_replace(',', '', $response["bpi"]["EUR"]["rate"]);
+        $btcPrice_usd = $response["USD"]["last"];
+        $btcPrice_eur = $response["EUR"]["last"];
 
         $cryptocurrencies = Cryptocurrency::where('maintenance', false)->get();
         foreach ($cryptocurrencies as $cryptocurrency)

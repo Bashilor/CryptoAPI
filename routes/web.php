@@ -15,7 +15,7 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'api/v1'], function($app)
+$router->group(['prefix' => 'api/v1', 'middleware' => 'auth'], function($app)
 {
     $app->get('cryptocurrency','CryptocurrencyController@index');
 

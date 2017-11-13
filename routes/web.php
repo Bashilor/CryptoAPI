@@ -17,6 +17,8 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api/v1', 'middleware' => 'auth'], function($app)
 {
+    $app->get('account/balance','AccountController@balance');
+
     $app->get('cryptocurrency','CryptocurrencyController@index');
 
     $app->get('cryptocurrency/{symbol}','CryptocurrencyController@get');

@@ -29,4 +29,28 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'api_token', 'webhook_token', 'custom_uri'
     ];
+
+    /**
+     * Get the balances for the user.
+     */
+    public function balance()
+    {
+        return $this->hasMany('App\UserBalance');
+    }
+
+    /**
+     * Get the api calls for the user.
+     */
+    public function apicall()
+    {
+        return $this->hasMany('App\ApiCall');
+    }
+
+    /**
+     * Get the payments for the user.
+     */
+    public function payment()
+    {
+        return $this->hasMany('App\Payment');
+    }
 }

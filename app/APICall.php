@@ -26,7 +26,7 @@ class APICall extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'uri', 'called_at'
+        'id', 'user_id', 'uri', 'called_at'
     ];
 
     /**
@@ -37,4 +37,12 @@ class APICall extends Model
     protected $hidden = [
         //
     ];
+
+    /**
+     * Get the user related to the api call.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

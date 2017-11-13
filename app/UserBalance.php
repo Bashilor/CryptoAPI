@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Payment extends Model
+class UserBalance extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'payments';
+    protected $table = 'user_balances';
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +19,7 @@ class Payment extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'uuid', 'payment_address', 'amount', 'cryptocurrency_id', 'status'
+        'user_id', 'cryptocurrency_id', 'balance'
     ];
 
     /**
@@ -32,18 +32,18 @@ class Payment extends Model
     ];
 
     /**
-     * Get the user related to the payment.
+     * Get the user related to the balance.
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'id');
     }
 
     /**
-     * Get the cryptocurrency related to the payment.
+     * Get the cryptocurrency related to the balance.
      */
     public function cryptocurrency()
     {
-        return $this->belongsTo('App\Cryptocurrency');
+        return $this->belongsTo('App\Cryptocurrency', 'id');
     }
 }

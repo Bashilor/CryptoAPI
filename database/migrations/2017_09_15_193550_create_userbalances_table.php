@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePaymentsTable extends Migration
+class CreateUserBalancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,15 @@ class CreatePaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('user_balances', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->uuid('uuid');
-            $table->string('payment_address');
-            $table->decimal('amount', 16, 8);
             $table->integer('cryptocurrency_id')->unsigned();
             $table->foreign('cryptocurrency_id')->references('id')->on('cryptocurrencies');
-            $table->integer('status');
+            $table->decimal('balance', 16, 8)->default(0);
             $table->timestamps();
         });
     }
@@ -36,6 +33,6 @@ class CreatePaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('user_balances');
     }
 }

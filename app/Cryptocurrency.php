@@ -30,4 +30,20 @@ class Cryptocurrency extends Model
     protected $hidden = [
         //
     ];
+
+    /**
+     * Get the payments for the cryptocurrency.
+     */
+    public function payment()
+    {
+        return $this->hasMany('App\Payment');
+    }
+
+    /**
+     * Get the balance for the cryptocurrency.
+     */
+    public function balance()
+    {
+        return $this->hasMany('App\UserBalance');
+    }
 }

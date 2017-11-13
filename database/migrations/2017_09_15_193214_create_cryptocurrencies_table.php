@@ -14,6 +14,8 @@ class CreateCryptocurrenciesTable extends Migration
     public function up()
     {
         Schema::create('cryptocurrencies', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+
             $table->increments('id');
             $table->string('name');
             $table->string('symbol', 5);

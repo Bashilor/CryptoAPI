@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Cryptocurrency;
 use App\Jobs\SendPaymentNotification;
 use App\Payment;
+use App\UserBalance;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 
@@ -77,6 +78,14 @@ class PaymentStatus extends Command
                 {
                     $payment->status = 2;
                     $payment->save();
+
+                    $user_balance = UserBalance::where([
+                        ['user_id', $payment->user_id],
+                        ['cryptocurrency_id', $payment->cryptocurrency_id]
+                    ])->first();
+
+                    $user_balance->balance += $payment->amount;
+                    $user_balance->save();
 
                     $paymentNotification = (new SendPaymentNotification($payment))->onQueue('payment');
                     $this->dispatch($paymentNotification);

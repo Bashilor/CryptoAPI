@@ -36,7 +36,7 @@ class UserBalance extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User', 'id');
+        return $this->belongsTo('App\User');
     }
 
     /**
@@ -44,6 +44,6 @@ class UserBalance extends Model
      */
     public function cryptocurrency()
     {
-        return $this->belongsTo('App\Cryptocurrency', 'id');
+        return $this->belongsTo('App\Cryptocurrency');
     }
 }

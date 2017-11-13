@@ -1,0 +1,15 @@
+{
+  "name": "CryptoAPI",
+  "version": "1.0.0",
+  "description": "Documentation of CryptoAPI.",
+  "title": "CryptoAPI - Documentation",
+  "url" : "https://cryptoapi.com",
+  "header": {
+    "title": "Using the API",
+    "filename": "doc/header.md"
+  },
+  "footer": {
+    "title": "",
+    "filename": "doc/footer.md"
+  }
+}

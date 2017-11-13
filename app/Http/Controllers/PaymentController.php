@@ -61,6 +61,32 @@ class PaymentController extends Controller
     /**
      * @usage : /payment/new
      *
+     * @apiGroup Payment
+     * @apiName CreatePayment
+     * @apiVersion 1.0.0
+     * @api {post}  /api/v1/payment/new Create a new payment
+     * @apiDescription Used to create a new payment form identified by a unique ID (UUID v4).
+     * @apiHeader {String} Api-Token Your api-token.
+     * @apiHeader {String} Content-Type Type of the content sent. <br/> Allowed value : <code>application/json</code>
+     *
+     * @apiExample {curl} Example usage:
+     *     curl -X POST -H "Api-Token: my_api_token" -H "Content-Type: application/json" -i 'http://localhost:8000/api/v1/payment/new' -d '{"cryptocurrency": "BTC", "amount": "123.456"}'
+     *
+     * @apiParam {String} cryptocurrency Symbol of the cryptocurrency.
+     * @apiParam {Decimal} amount Amount is a decimal (8, 16).
+     *
+     * @apiSuccessExample Success-Response:
+     *     HTTP/2 200 OK
+     *     {
+     *          "uuid": "6778571c-f564-4f85-bdf1-8a6ca24cdce6",
+     *          "payment_address": "12oPLQVkPHkeAzrM1hKPh6K6krzrJtdp1p",
+     *          "amount": "1.00000000",
+     *          "cryptocurrency_id": 1,
+     *          "status": 1,
+     *          "created_at": "2017-11-12 16:57:12",
+     *          "updated_at": "2017-11-12 16:57:12"
+     *     }
+     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */

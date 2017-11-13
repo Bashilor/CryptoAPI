@@ -30,7 +30,7 @@ class CryptocurrencyController extends Controller
      * @apiHeader {String} Api-Token Your api-token.
      *
      * @apiExample {curl} Example usage:
-     *     curl -X GET -H "Api-Token: my_api_token" -i 'https://cryptoapi.com/api/v1/cryptocurrency'
+     *     curl -X GET -H "Api-Token: my_api_token" -i 'https://anopay.org/api/v1/cryptocurrency'
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/2 200 OK
@@ -77,7 +77,7 @@ class CryptocurrencyController extends Controller
      * @apiHeader {String} Api-Token Your api-token.
      *
      * @apiExample {curl} Example usage:
-     *     curl -X GET -H "Api-Token: my_api_token" -i 'https://cryptoapi.com/api/v1/cryptocurrency/BTC'
+     *     curl -X GET -H "Api-Token: my_api_token" -i 'https://anopay.org/api/v1/cryptocurrency/BTC'
      *
      * @apiParam {String} symbol Symbol of the cryptocurrency.
      *
@@ -126,7 +126,7 @@ class CryptocurrencyController extends Controller
      * @apiHeader {String} Api-Token Your api-token.
      *
      * @apiExample {curl} Example usage:
-     *     curl -X GET -H "Api-Token: my_api_token" -i 'https://cryptoapi.com/api/v1/cryptocurrency/list/BTC-LTC'
+     *     curl -X GET -H "Api-Token: my_api_token" -i 'https://anopay.org/api/v1/cryptocurrency/list/BTC-LTC'
      *
      * @apiParam {String} symbols List of symbols of the cryptocurrencies.
      *

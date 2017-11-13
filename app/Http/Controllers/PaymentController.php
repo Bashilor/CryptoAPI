@@ -68,7 +68,7 @@ class PaymentController extends Controller
      * @apiHeader {String} Content-Type Type of the content sent. <br/> Allowed value : <code>application/json</code>
      *
      * @apiExample {curl} Example usage:
-     *     curl -X POST -H "Api-Token: my_api_token" -H "Content-Type: application/json" -i 'http://localhost:8000/api/v1/payment/new' -d '{"cryptocurrency": "BTC", "amount": "123.456"}'
+     *     curl -X POST -H "Api-Token: my_api_token" -H "Content-Type: application/json" -i 'http://anopay.org/api/v1/payment/new' -d '{"cryptocurrency": "BTC", "amount": "123.456"}'
      *
      * @apiParam {String} cryptocurrency Symbol of the cryptocurrency.
      * @apiParam {Decimal} amount Amount is a decimal (8, 16).

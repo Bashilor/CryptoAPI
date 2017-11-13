@@ -30,7 +30,7 @@ class AccountController extends Controller
      * @apiHeader {String} Api-Token Your api-token.
      *
      * @apiExample {curl} Example usage:
-     *     curl -X GET -H "Api-Token: my_api_token" -i 'https://cryptoapi.com/api/v1/account/balance'
+     *     curl -X GET -H "Api-Token: my_api_token" -i 'https://anopay.org/api/v1/account/balance'
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/2 200 OK

@@ -1,1 +1,1 @@
-2017 | CrytoAPI - All rights reserved.
+2017 | AnoPay - All rights reserved.

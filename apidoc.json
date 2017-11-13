@@ -1,9 +1,9 @@
 {
-  "name": "CryptoAPI",
+  "name": "AnoPay",
   "version": "1.0.0",
-  "description": "Documentation of CryptoAPI.",
-  "title": "CryptoAPI - Documentation",
-  "url" : "https://cryptoapi.com",
+  "description": "Documentation of AnoPay.",
+  "title": "AnoPay - Documentation",
+  "url" : "https://anopay.org",
   "header": {
     "title": "Using the API",
     "filename": "doc/header.md"

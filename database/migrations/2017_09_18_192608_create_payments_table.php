@@ -21,7 +21,7 @@ class CreatePaymentsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->uuid('uuid');
             $table->string('payment_address');
-            $table->decimal('amount', 16, 8);
+            $table->bigInteger('amount');
             $table->integer('cryptocurrency_id')->unsigned();
             $table->foreign('cryptocurrency_id')->references('id')->on('cryptocurrencies');
             $table->integer('status');

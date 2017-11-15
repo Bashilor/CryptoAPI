@@ -19,7 +19,7 @@ class UserBalance extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'cryptocurrency_id', 'balance'
+        'user_id', 'cryptocurrency_id', 'cryptocurrency', 'balance'
     ];
 
     /**
@@ -28,7 +28,7 @@ class UserBalance extends Model
      * @var array
      */
     protected $hidden = [
-        'id', 'user_id'
+        'id', 'user_id', 'cryptocurrency_id', 'created_at'
     ];
 
     /**

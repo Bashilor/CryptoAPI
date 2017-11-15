@@ -19,7 +19,7 @@ $router->group(['prefix' => 'api/v1', 'middleware' => 'auth'], function($app)
 {
     $app->get('account/balance','AccountController@balance');
 
-    $app->get('account/withdraw','AccountController@withdraw');
+    $app->post('account/withdraw','AccountController@withdraw');
 
     $app->get('cryptocurrency','CryptocurrencyController@index');
 

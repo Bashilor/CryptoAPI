@@ -63,6 +63,8 @@ class PaymentStatus extends Command
 
             foreach ($payments as $payment)
             {
+                $balance = 0;
+
                 if($cryptocurrency->type == 'BITCOIN')
                 {
                     $client->call('getbalance', [$payment->uuid, $cryptocurrency->confirmations]);
@@ -74,7 +76,7 @@ class PaymentStatus extends Command
                     $balance = json_decode($client->output)->result;
                 }
 
-                if ($balance == $payment->amount)
+                if ($balance == ($payment->amount / 1e8))
                 {
                     $payment->status = 2;
                     $payment->save();

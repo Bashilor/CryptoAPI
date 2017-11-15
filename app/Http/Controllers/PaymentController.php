@@ -63,15 +63,15 @@ class PaymentController extends Controller
      * @apiName 1_CreatePayment
      * @apiVersion 1.0.0
      * @api {post}  /api/v1/payments/payment Create payment
-     * @apiDescription Used to create a payment form identified by a unique ID (UUID v4).
+     * @apiDescription Used to create a payment identified by a unique ID (UUID v4).
      * @apiHeader {String} Api-Token Your api-token.
      * @apiHeader {String="application/json"} Content-Type Type of the content sent.
      *
      * @apiExample {curl} Example usage:
-     *     curl -X POST -H "Api-Token: my_api_token" -H "Content-Type: application/json" -i 'https://anopay.org/api/v1/payments/payment' -d '{"cryptocurrency": "BTC", "amount": 123456}'
+     *     curl -X POST -H "Api-Token: my_api_token" -H "Content-Type: application/json" -i 'https://anopay.org/api/v1/payments/payment' -d '{"cryptocurrency": "BTC", "amount": 123.456}'
      *
      * @apiParam {String="BTC","LTC","DASH","PIVX","NXS","DOGE"} cryptocurrency Symbol of the cryptocurrency.
-     * @apiParam {BigInteger{1-16}} amount A positive BigInteger in the smallest cryptocurrency unit (satoshi, e.g. 100000000 to charge 1 coin). <br/> Minimal amount is a satoshi (100000000 / 1e8).
+     * @apiParam {Decimal{8-16}} amount A positive Decimal (up to the smallest cryptocurrency unit a.k.a satoshi; e.g. 0.00000001).
      *
      * @apiSuccessExample Success-Response:
      *  HTTP/2 200 OK
@@ -80,9 +80,9 @@ class PaymentController extends Controller
      *      "result": {
      *          "payment": {
      *              "uuid": "e63d9240-f58d-4793-83ba-03ccc654fb34",
-     *              "payment_address": "122",
-     *              "amount": 123,
-     *              "cryptocurrency": "NXS",
+     *              "payment_address": "1PS3iuSLsJBiPZfTra9pBc7g8zr4myL1UV",
+     *              "amount": 123.456,
+     *              "cryptocurrency": "BTC",
      *              "status": "pending",
      *              "created_at": "2017-11-15 12:18:08",
      *              "updated_at": "2017-11-15 12:18:08"
@@ -99,7 +99,7 @@ class PaymentController extends Controller
 
         Validator::make($request->json()->all(), [
             'cryptocurrency' => 'required|string|exists:mysql.cryptocurrencies,symbol',
-            'amount' => 'required|digits_between:1,16'
+            'amount' => 'required|regex:/^([\d]{1,8}([.][\d]{0,8})?)$/'
         ])->validate();
 
         $cryptocurrency = Cryptocurrency::where([
@@ -116,7 +116,7 @@ class PaymentController extends Controller
         $payment->user_id = User::where('api_token', $request->header('Api-Token'))->first()->id;
         $payment->uuid = $uuid;
         $payment->payment_address = $payment_address;
-        $payment->amount = $body->amount;
+        $payment->amount = $body->amount * 1e8;
         $payment->cryptocurrency_id = $cryptocurrency->id;
         $payment->cryptocurrency = $cryptocurrency->symbol;
         $payment->status = 1;
@@ -124,6 +124,7 @@ class PaymentController extends Controller
 
         $payment = Payment::find($payment->id);
         $payment->status = $payment->status == 1 ? "pending" : ($payment->status == 2 ? "confirmed" : "cancelled");
+        $payment->amount = $payment->amount / 1e8;
 
         return response()->json([
             'error' => '',
@@ -154,9 +155,9 @@ class PaymentController extends Controller
      *          "payments": [
      *              {
      *                  "uuid": "e63d9240-f58d-4793-83ba-03ccc654fb34",
-     *                  "payment_address": "122",
-     *                  "amount": 123,
-     *                  "cryptocurrency": "NXS",
+     *                  "payment_address": "1PS3iuSLsJBiPZfTra9pBc7g8zr4myL1UV",
+     *                  "amount": 123.456,
+     *                  "cryptocurrency": "BTC",
      *                  "status": "confirmed",
      *                  "created_at": "2017-11-15 12:18:08",
      *                  "updated_at": "2017-11-15 12:18:08"
@@ -178,6 +179,7 @@ class PaymentController extends Controller
         foreach ($payments as $payment)
         {
             $payment->status = $payment->status == 1 ? "pending" : ($payment->status == 2 ? "confirmed" : "cancelled");
+            $payment->amount = $payment->amount / 1e8;
         }
 
         return response()->json([

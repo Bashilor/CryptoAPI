@@ -53,4 +53,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->hasMany('App\Payment');
     }
+
+    /**
+     * Get the withdraws for the user.
+     */
+    public function withdraw()
+    {
+        return $this->hasMany('App\Withdraw');
+    }
 }

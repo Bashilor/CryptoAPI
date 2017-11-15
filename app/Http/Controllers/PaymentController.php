@@ -93,8 +93,8 @@ class PaymentController extends Controller
         $body = json_decode($request->getContent());
 
         Validator::make($request->json()->all(), [
-            'cryptocurrency' => 'required|string',
-            'amount' => 'required|numeric'
+            'cryptocurrency' => 'required|string|exists:mysql.cryptocurrencies,symbol',
+            'amount' => 'required|digits_between:1,16'
         ])->validate();
 
         $cryptocurrency = Cryptocurrency::where([

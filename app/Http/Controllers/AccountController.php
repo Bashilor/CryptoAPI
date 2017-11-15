@@ -58,4 +58,15 @@ class AccountController extends Controller
             ]
         ]);
     }
+
+    /**
+     * @usage : /api/v1/account/withdraw
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function withdraw(Request $request)
+    {
+
+    }
 }

@@ -19,6 +19,8 @@ $router->group(['prefix' => 'api/v1', 'middleware' => 'auth'], function($app)
 {
     $app->get('account/balance','AccountController@balance');
 
+    $app->get('account/withdraw','AccountController@withdraw');
+
     $app->get('cryptocurrency','CryptocurrencyController@index');
 
     $app->get('cryptocurrency/{symbol}','CryptocurrencyController@get');
@@ -28,6 +30,4 @@ $router->group(['prefix' => 'api/v1', 'middleware' => 'auth'], function($app)
     $app->post('payments/payment', 'PaymentController@create');
 
     $app->get('payments/payment', 'PaymentController@getlist');
-
-    $app->get('payments/payment/{payment_uuid}', 'PaymentController@update');
 });

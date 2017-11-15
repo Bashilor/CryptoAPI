@@ -140,7 +140,7 @@ class PaymentController extends Controller
      * @apiName 2_ListPayment
      * @apiVersion 1.0.0
      * @api {get}  /api/v1/payments/payment List payments
-     * @apiDescription Used to list payments create by the create payment call and that are in any state.
+     * @apiDescription Used to list payments create by the <a href="#api-Payment-1_CreatePayment">create payment</a> call and that are in any state. <br/> There is no way, at the moment, to filter the list of payments.
      * @apiHeader {String} Api-Token Your api-token.
      *
      * @apiExample {curl} Example usage:

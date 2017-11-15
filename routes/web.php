@@ -25,5 +25,7 @@ $router->group(['prefix' => 'api/v1', 'middleware' => 'auth'], function($app)
 
     $app->get('cryptocurrency/list/{symbols}','CryptocurrencyController@getlist');
 
-    $app->post('payment/new', 'PaymentController@create');
+    $app->post('payments/payment', 'PaymentController@create');
+
+    $app->get('payments/payment', 'PaymentController@getlist');
 });

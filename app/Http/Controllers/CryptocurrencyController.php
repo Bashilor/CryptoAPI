@@ -150,23 +150,7 @@ class CryptocurrencyController extends Controller
      *              "created_at": "2017-11-11 18:51:44",
      *              "updated_at": "2017-11-11 18:53:30"
      *          },
-     *          {
-     *              "id": 2,
-     *              "name": "Litecoin",
-     *              "symbol": "LTC",
-     *              "type": "BITCOIN",
-     *              "logo_url": "https://i.imgur.com/R29q3dD.png",
-     *              "last_block_update": "2017-11-11 18:51:44",
-     *              "last_btc_price": "0.01006000",
-     *              "last_usd_price": "62.63",
-     *              "last_eur_price": "53.19",
-     *              "confirmations": 6,
-     *              "uri": "litecoin",
-     *              "maintenance": 0,
-     *              "wallet_port": 9332,
-     *              "created_at": "2017-11-11 18:51:44",
-     *              "updated_at": "2017-11-11 18:53:30"
-     *          }
+     *          ...
      *     ]
      *
      * @param $symbols

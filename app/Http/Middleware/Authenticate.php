@@ -40,7 +40,8 @@ class Authenticate
                 'error' => [
                     'code' => 401,
                     'message' => 'Unauthorized'
-                ]
+                ],
+                'result' => ''
             ]);
         }
 

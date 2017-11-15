@@ -24,6 +24,7 @@ class CreatePaymentsTable extends Migration
             $table->bigInteger('amount');
             $table->integer('cryptocurrency_id')->unsigned();
             $table->foreign('cryptocurrency_id')->references('id')->on('cryptocurrencies');
+            $table->string('cryptocurrency');
             $table->integer('status');
             $table->timestamps();
         });

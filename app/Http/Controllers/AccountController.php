@@ -51,6 +51,11 @@ class AccountController extends Controller
 
         $balances = User::find($user->id)->balance;
 
-        return response()->json($balances);
+        return response()->json([
+            'error' => '',
+            'result' => [
+                'balances' => $balances
+            ]
+        ]);
     }
 }

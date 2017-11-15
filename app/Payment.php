@@ -19,7 +19,7 @@ class Payment extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'uuid', 'payment_address', 'amount', 'cryptocurrency_id', 'status'
+        'user_id', 'uuid', 'payment_address', 'amount', 'cryptocurrency_id', 'cryptocurrency', 'status'
     ];
 
     /**
@@ -28,7 +28,7 @@ class Payment extends Model
      * @var array
      */
     protected $hidden = [
-        'id', 'user_id'
+        'id', 'user_id', 'cryptocurrency_id'
     ];
 
     /**

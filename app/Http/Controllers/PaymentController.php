@@ -62,18 +62,18 @@ class PaymentController extends Controller
      * @apiGroup Payment
      * @apiName 1_CreatePayment
      * @apiVersion 1.0.0
-     * @api {post}  /api/v1/payment/new Create a new payment
-     * @apiDescription Used to create a new payment form identified by a unique ID (UUID v4).
+     * @api {post}  /api/v1/payment/new Create a payment
+     * @apiDescription Used to create a payment form identified by a unique ID (UUID v4).
      * @apiHeader {String} Api-Token Your api-token.
-     * @apiHeader {String} Content-Type Type of the content sent. <br/> Allowed value : <code>application/json</code>
+     * @apiHeader {String="application/json"} Content-Type Type of the content sent.
      *
      * @apiExample {curl} Example usage:
-     *     curl -X POST -H "Api-Token: my_api_token" -H "Content-Type: application/json" -i 'http://anopay.org/api/v1/payment/new' -d '{"cryptocurrency": "BTC", "amount": "123.456"}'
+     *     curl -X POST -H "Api-Token: my_api_token" -H "Content-Type: application/json" -i 'https://anopay.org/api/v1/payment/new' -d '{"cryptocurrency": "BTC", "amount": 123456}'
      *
-     * @apiParam {String} cryptocurrency Symbol of the cryptocurrency.
-     * @apiParam {Integer} amount Amount is a decimal (8, 16).
+     * @apiParam {String="BTC","LTC","DASH","PIVX","NXS","DOGE"} cryptocurrency Symbol of the cryptocurrency.
+     * @apiParam {BigInteger{1-16}} amount A positive BigInteger in the smallest cryptocurrency unit (satoshi, e.g. 100000000 to charge 1 coin). <br/> Minimal amount is a satoshi (100000000 / 1e8).
      *
-     * @apiSuccess (200) {String} uuid Unique ID (UUID v4) utilized to retrieve, update, ... payment.
+     * @apiSuccess (200) {String} uuid Unique ID (UUID v4) utilized to retrieve, update, ... a payment.
      * @apiSuccess (200) {String} payment_address Address where to send the coins.
      * @apiSuccessExample Success-Response:
      *     HTTP/2 200 OK
@@ -101,13 +101,13 @@ class PaymentController extends Controller
 
         $uuid = Uuid::generate(4)->string;
 
-        $payment_address = $this->getNewAddress($cryptocurrency, $uuid);
+        // $payment_address = $this->getNewAddress($cryptocurrency, $uuid);
 
         $payment = new Payment();
 
         $payment->user_id = User::where('api_token', $request->header('Api-Token'))->first()->id;
         $payment->uuid = $uuid;
-        $payment->payment_address = $payment_address;
+        $payment->payment_address = '123';
         $payment->amount = $body->amount;
         $payment->cryptocurrency_id = $cryptocurrency->id;
         $payment->status = 1;

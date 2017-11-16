@@ -33,30 +33,30 @@ class CryptocurrencyController extends Controller
      *     curl -X GET -H "Api-Token: my_api_token" -i 'https://anopay.org/api/v1/cryptocurrency'
      *
      * @apiSuccessExample Success-Response:
-     *     HTTP/2 200 OK
-     *     [
-     *          {
-     *              "id": 1,
-     *              "name": "Bitcoin",
-     *              "symbol": "BTC",
-     *              "type": "BITCOIN",
-     *              "logo_url": "https://i.imgur.com/5i4e1Vi.png",
-     *              "last_block_update": "2017-11-11 18:51:44",
-     *              "block_time": 600,
-     *              "last_btc_price": "1.00000000",
-     *              "last_usd_price": "6225.42",
-     *              "last_eur_price": "5287.74",
-     *              "confirmations": 6,
-     *              "block_explorer": "https://blockchain.info",
-     *              "tx_explorer": "https://blockchain.info/en/tx/",
-     *              "uri": "bitcoin",
-     *              "maintenance": 1,
-     *              "wallet_port": 8332,
-     *              "created_at": "2017-11-11 18:51:44",
-     *              "updated_at": "2017-11-11 18:53:30"
-     *          },
-     *          ...
-     *     ]
+     * HTTP/2 200 OK
+     * {
+     *     "error": "",
+     *     "result": {
+     *         "cryptocurrencies": [
+     *             {
+     *                 "name": "Bitcoin",
+     *                 "symbol": "BTC",
+     *                 "type": "BITCOIN",
+     *                 "logo_url": "https://i.imgur.com/5i4e1Vi.png",
+     *                 "last_block_update": "2017-11-16 09:29:00",
+     *                 "block_time": 600,
+     *                 "last_usd_price": "0.00",
+     *                 "last_eur_price": "0.00",
+     *                 "confirmations": 6,
+     *                 "block_explorer": "https://blockchain.info",
+     *                 "tx_explorer": "https://blockchain.info/en/tx/",
+     *                 "uri": "bitcoin",
+     *                 "maintenance": "false"
+     *             },
+     *             ...
+     *         ]
+     *     }
+     * }
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -64,7 +64,17 @@ class CryptocurrencyController extends Controller
     {
         $cryptocurrencies = Cryptocurrency::all();
 
-        return response()->json($cryptocurrencies);
+        foreach ($cryptocurrencies as $cryptocurrency)
+        {
+            $cryptocurrency->maintenance = $cryptocurrency->maintenance == 0 ? "false" : "true";
+        }
+
+        return response()->json([
+            'error' => '',
+            'result' => [
+                'cryptocurrencies' => $cryptocurrencies
+            ]
+        ]);
     }
 
     /**
@@ -83,29 +93,27 @@ class CryptocurrencyController extends Controller
      * @apiParam {String} symbol Symbol of the cryptocurrency.
      *
      * @apiSuccessExample Success-Response:
-     *     HTTP/2 200 OK
-     *     [
-     *          {
-     *              "id": 1,
-     *              "name": "Bitcoin",
-     *              "symbol": "BTC",
-     *              "type": "BITCOIN",
-     *              "logo_url": "https://i.imgur.com/5i4e1Vi.png",
-     *              "last_block_update": "2017-11-11 18:51:44",
-     *              "block_time": 600,
-     *              "last_btc_price": "1.00000000",
-     *              "last_usd_price": "6225.42",
-     *              "last_eur_price": "5287.74",
-     *              "confirmations": 6,
-     *              "block_explorer": "https://blockchain.info",
-     *              "tx_explorer": "https://blockchain.info/en/tx/",
-     *              "uri": "bitcoin",
-     *              "maintenance": 1,
-     *              "wallet_port": 8332,
-     *              "created_at": "2017-11-11 18:51:44",
-     *              "updated_at": "2017-11-11 18:53:30"
-     *          }
-     *     ]
+     * HTTP/2 200 OK
+     * {
+     *     "error": "",
+     *     "result": {
+     *         "cryptocurrency": {
+     *             "name": "Bitcoin",
+     *             "symbol": "BTC",
+     *             "type": "BITCOIN",
+     *             "logo_url": "https://i.imgur.com/5i4e1Vi.png",
+     *             "last_block_update": "2017-11-16 09:29:00",
+     *             "block_time": 600,
+     *             "last_usd_price": "0.00",
+     *             "last_eur_price": "0.00",
+     *             "confirmations": 6,
+     *             "block_explorer": "https://blockchain.info",
+     *             "tx_explorer": "https://blockchain.info/en/tx/",
+     *             "uri": "bitcoin",
+     *             "maintenance": "false"
+     *         }
+     *     }
+     * }
      *
      * @param $symbol
      * @return \Illuminate\Http\JsonResponse
@@ -114,7 +122,12 @@ class CryptocurrencyController extends Controller
     {
         $cryptocurrency = Cryptocurrency::where('symbol', $symbol)->firstOrFail();
 
-        return response()->json($cryptocurrency);
+        return response()->json([
+            'error' => '',
+            'result' => [
+                'cryptocurrency' => $cryptocurrency
+            ]
+        ]);
     }
 
     /**
@@ -133,28 +146,30 @@ class CryptocurrencyController extends Controller
      * @apiParam {String} symbols List of symbols of the cryptocurrencies.
      *
      * @apiSuccessExample Success-Response:
-     *     HTTP/2 200 OK
-     *     [
-     *          {
-     *              "id": 1,
-     *              "name": "Bitcoin",
-     *              "symbol": "BTC",
-     *              "type": "BITCOIN",
-     *              "logo_url": "https://i.imgur.com/5i4e1Vi.png",
-     *              "last_block_update": "2017-11-11 18:51:44",
-     *              "block_time": 600,
-     *              "last_btc_price": "1.00000000",
-     *              "last_usd_price": "6225.42",
-     *              "last_eur_price": "5287.74",
-     *              "confirmations": 6,
-     *              "uri": "bitcoin",
-     *              "maintenance": 0,
-     *              "wallet_port": 8332,
-     *              "created_at": "2017-11-11 18:51:44",
-     *              "updated_at": "2017-11-11 18:53:30"
-     *          },
-     *          ...
-     *     ]
+     * HTTP/2 200 OK
+     * {
+     *     "error": "",
+     *     "result": {
+     *         "cryptocurrencies": [
+     *             {
+     *                 "name": "Bitcoin",
+     *                 "symbol": "BTC",
+     *                 "type": "BITCOIN",
+     *                 "logo_url": "https://i.imgur.com/5i4e1Vi.png",
+     *                 "last_block_update": "2017-11-16 09:29:00",
+     *                 "block_time": 600,
+     *                 "last_usd_price": "0.00",
+     *                 "last_eur_price": "0.00",
+     *                 "confirmations": 6,
+     *                 "block_explorer": "https://blockchain.info",
+     *                 "tx_explorer": "https://blockchain.info/en/tx/",
+     *                 "uri": "bitcoin",
+     *                 "maintenance": "false"
+     *             },
+     *             ...
+     *         ]
+     *     }
+     * }
      *
      * @param $symbols
      * @return \Illuminate\Http\JsonResponse

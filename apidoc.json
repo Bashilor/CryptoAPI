@@ -15,6 +15,7 @@
     "GetListCryptocurrency",
     "Payment",
     "CreatePayment",
+    "PaymentStatus",
     "ListPayment"
   ],
   "header": {

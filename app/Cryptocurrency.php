@@ -28,7 +28,7 @@ class Cryptocurrency extends Model
      * @var array
      */
     protected $hidden = [
-        //
+        'id', 'wallet_port', 'created_at', 'updated_at'
     ];
 
     /**

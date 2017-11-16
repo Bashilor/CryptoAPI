@@ -47,15 +47,20 @@ class AccountController extends Controller
      *     curl -X GET -H "Api-Token: my_api_token" -i 'https://anopay.org/api/v1/account/balance'
      *
      * @apiSuccessExample Success-Response:
-     *     HTTP/2 200 OK
-     *     [
-     *          {
-     *              "cryptocurrency": "BTC",
-     *              "balance": "0.12345678",
-     *              "updated_at": "2017-11-15 12:18:08"
-     *          },
-     *          ...
-     *     ]
+     * HTTP/2 200 OK
+     * {
+     *     "error": "",
+     *     "result": {
+     *         "balances": [
+     *             {
+     *                 "cryptocurrency": "BTC",
+     *                 "balance": 123.456,
+     *                 "updated_at": "2017-11-15 12:18:08"
+     *             },
+     *             ...
+     *         ]
+     *     }
+     * }
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -114,21 +119,21 @@ class AccountController extends Controller
      * @apiParam {String} payout_address Wallet / exchange address to receive coins.
      *
      * @apiSuccessExample Success-Response:
-     *  HTTP/2 200 OK
-     *  {
-     *      "error": "",
-     *      "result": {
-     *          "withdraw": {
-     *              "uuid": "e63d9240-f58d-4793-83ba-03ccc654fb34",
-     *              "payout_address": "1PS3iuSLsJBiPZfTra9pBc7g8zr4myL1UV",
-     *              "amount": 123.456,
-     *              "cryptocurrency": "BTC",
-     *              "status": "pending",
-     *              "created_at": "2017-11-15 12:18:08",
-     *              "updated_at": "2017-11-15 12:18:08"
-     *          }
-     *      }
-     *  }
+     * HTTP/2 200 OK
+     * {
+     *     "error": "",
+     *     "result": {
+     *         "withdraw": {
+     *             "uuid": "e63d9240-f58d-4793-83ba-03ccc654fb34",
+     *             "payout_address": "1PS3iuSLsJBiPZfTra9pBc7g8zr4myL1UV",
+     *             "amount": 123.456,
+     *             "cryptocurrency": "BTC",
+     *             "status": "pending",
+     *             "created_at": "2017-11-15 12:18:08",
+     *             "updated_at": "2017-11-15 12:18:08"
+     *         }
+     *     }
+     * }
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse

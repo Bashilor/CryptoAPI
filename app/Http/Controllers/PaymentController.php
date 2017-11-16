@@ -74,21 +74,21 @@ class PaymentController extends Controller
      * @apiParam {Decimal{8-16}} amount A positive Decimal (up to the smallest cryptocurrency unit a.k.a satoshi; e.g. 0.00000001).
      *
      * @apiSuccessExample Success-Response:
-     *  HTTP/2 200 OK
-     *  {
-     *      "error": "",
-     *      "result": {
-     *          "payment": {
-     *              "uuid": "e63d9240-f58d-4793-83ba-03ccc654fb34",
-     *              "payment_address": "1PS3iuSLsJBiPZfTra9pBc7g8zr4myL1UV",
-     *              "amount": 123.456,
-     *              "cryptocurrency": "BTC",
-     *              "status": "pending",
-     *              "created_at": "2017-11-15 12:18:08",
-     *              "updated_at": "2017-11-15 12:18:08"
-     *          }
-     *      }
-     *  }
+     * HTTP/2 200 OK
+     * {
+     *     "error": "",
+     *     "result": {
+     *         "payment": {
+     *             "uuid": "e63d9240-f58d-4793-83ba-03ccc654fb34",
+     *             "payment_address": "1PS3iuSLsJBiPZfTra9pBc7g8zr4myL1UV",
+     *             "amount": 123.456,
+     *             "cryptocurrency": "BTC",
+     *             "status": "pending",
+     *             "created_at": "2017-11-15 12:18:08",
+     *             "updated_at": "2017-11-15 12:18:08"
+     *         }
+     *     }
+     * }
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -141,31 +141,31 @@ class PaymentController extends Controller
      * @apiName ListPayment
      * @apiVersion 1.0.0
      * @api {get}  /api/v1/payments/payment List payments
-     * @apiDescription Used to list payments create by the <a href="#api-Payment-CreatePayment">create payment</a> call and that are in any state. <br/> There is no way, at the moment, to filter the list of payments.
+     * @apiDescription Used to list payments created by the <a href="#api-Payment-CreatePayment">create payment</a> call and that are in any state. <br/> There is no way, at the moment, to filter the list of payments.
      * @apiHeader {String} Api-Token Your api-token.
      *
      * @apiExample {curl} Example usage:
      *     curl -X POST -H "Api-Token: my_api_token" -i 'https://anopay.org/api/v1/payments/payment'
      *
      * @apiSuccessExample Success-Response:
-     *  HTTP/2 200 OK
-     *  {
-     *      "error": "",
-     *      "result": {
-     *          "payments": [
-     *              {
-     *                  "uuid": "e63d9240-f58d-4793-83ba-03ccc654fb34",
-     *                  "payment_address": "1PS3iuSLsJBiPZfTra9pBc7g8zr4myL1UV",
-     *                  "amount": 123.456,
-     *                  "cryptocurrency": "BTC",
-     *                  "status": "confirmed",
-     *                  "created_at": "2017-11-15 12:18:08",
-     *                  "updated_at": "2017-11-15 12:18:08"
-     *              },
-     *              ...
-     *          ]
-     *      }
-     *  }
+     * HTTP/2 200 OK
+     * {
+     *     "error": "",
+     *     "result": {
+     *         "payments": [
+     *             {
+     *                 "uuid": "e63d9240-f58d-4793-83ba-03ccc654fb34",
+     *                 "payment_address": "1PS3iuSLsJBiPZfTra9pBc7g8zr4myL1UV",
+     *                 "amount": 123.456,
+     *                 "cryptocurrency": "BTC",
+     *                 "status": "pending",
+     *                 "created_at": "2017-11-15 12:18:08",
+     *                 "updated_at": "2017-11-15 12:18:08"
+     *             },
+     *             ...
+     *         ]
+     *     }
+     * }
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -186,6 +186,55 @@ class PaymentController extends Controller
             'error' => '',
             'result' => [
                 'payments' => $payments
+            ]
+        ]);
+    }
+
+    /**
+     * @usage : /payments/status/e63d9240-f58d-4793-83ba-03ccc654fb34
+     *
+     * @apiGroup Payment
+     * @apiName PaymentStatus
+     * @apiVersion 1.0.0
+     * @api {get}  /api/v1/payments/status/:uuid Check status
+     * @apiDescription Used to check a payment created by the <a href="#api-Payment-CreatePayment">create payment</a> call and that is in any state.
+     * @apiHeader {String} Api-Token Your api-token.
+     *
+     * @apiExample {curl} Example usage:
+     *     curl -X POST -H "Api-Token: my_api_token" -i 'https://anopay.org/api/v1/payments/status/e63d9240-f58d-4793-83ba-03ccc654fb34'
+     *
+     * @apiParam {String} uuid UUID of the payment.
+     *
+     * @apiSuccessExample Success-Response:
+     * HTTP/2 200 OK
+     * {
+     *     "error": "",
+     *     "result": {
+     *         "payment": {
+     *             "uuid": "e63d9240-f58d-4793-83ba-03ccc654fb34",
+     *             "payment_address": "1PS3iuSLsJBiPZfTra9pBc7g8zr4myL1UV",
+     *             "amount": 123.456,
+     *             "cryptocurrency": "BTC",
+     *             "status": "cancelled",
+     *             "created_at": "2017-11-15 12:18:08",
+     *             "updated_at": "2017-11-15 12:18:08"
+     *         }
+     *     }
+     * }
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function status(Request $request, $payment_uuid)
+    {
+        $payment = Payment::where('uuid', $payment_uuid)->firstOrFail();
+        $payment->status = $payment->status == 1 ? "pending" : ($payment->status == 2 ? "confirmed" : "cancelled");
+        $payment->amount = $payment->amount / 1e8;
+
+        return response()->json([
+            'error' => '',
+            'result' => [
+                'payment' => $payment
             ]
         ]);
     }

@@ -18,16 +18,13 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api/v1', 'middleware' => 'auth'], function($app)
 {
     $app->get('account/balance','AccountController@balance');
-
     $app->post('account/withdraw','AccountController@withdraw');
+    $app->get('account/token','AccountController@token');
 
     $app->get('cryptocurrency','CryptocurrencyController@index');
-
     $app->get('cryptocurrency/{symbol}','CryptocurrencyController@get');
-
     $app->get('cryptocurrency/list/{symbols}','CryptocurrencyController@getlist');
 
     $app->post('payments/payment', 'PaymentController@create');
-
     $app->get('payments/payment', 'PaymentController@getlist');
 });

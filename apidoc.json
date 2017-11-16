@@ -8,6 +8,7 @@
     "Account",
     "GetAccountBalance",
     "CreateWithdraw",
+    "RefreshToken",
     "Cryptocurrency",
     "GetCryptocurrencies",
     "GetCryptocurrency",

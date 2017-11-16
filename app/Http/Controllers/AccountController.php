@@ -7,6 +7,7 @@ use App\User;
 use App\Jobs\NewAPICall;
 use App\Withdraw;
 use Carbon\Carbon;
+use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use JsonRpc\Client;
@@ -171,6 +172,54 @@ class AccountController extends Controller
             'error' => '',
             'result' => [
                 'withdraw' => $withdraw
+            ]
+        ]);
+    }
+
+    /**
+     * @usage : /api/v1/account/token
+     *
+     * @apiGroup Account
+     * @apiName RefreshToken
+     * @apiVersion 1.0.0
+     * @api {get}  /api/v1/account/token Refresh api token
+     * @apiDescription Used to refresh the user api token and replace the old one, in case of compromised data.
+     * @apiHeader {String} Api-Token Your api-token.
+     *
+     * @apiExample {curl} Example usage:
+     *     curl -X GET -H "Api-Token: my_api_token" -i 'https://anopay.org/api/v1/account/token'
+     *
+     * @apiSuccessExample Success-Response:
+     * HTTP/2 200 OK
+     * {
+     *     "error": "",
+     *     "result": {
+     *         "api_token": "32QB3RxsRJzUvW9SHfyAVH8JrcSYGHJyWxBpjbEbbSYsRCfGFjjRLRpe7Aap"
+     *     }
+     * }
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function token(Request $request)
+    {
+        $generator = new ComputerPasswordGenerator();
+        $generator
+            ->setUppercase()
+            ->setLowercase()
+            ->setNumbers()
+            ->setSymbols(false)
+            ->setLength(60);
+        $api_token = $generator->generatePassword();
+
+        $user = User::where('api_token', $request->header('Api-Token'))->first();
+        $user->api_token = $api_token;
+        $user->save();
+
+        return response()->json([
+            'error' => '',
+            'result' => [
+                'api_token' => $api_token
             ]
         ]);
     }

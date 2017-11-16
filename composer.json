@@ -10,7 +10,8 @@
         "vlucas/phpdotenv": "~2.2",
         "jsonrpc/jsonrpc": "^1.0",
         "webpatser/laravel-uuid": "^3.0",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "hackzilla/password-generator": "^1.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

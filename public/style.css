@@ -1,0 +1,24 @@
+h2, h5 {
+    font-family: 'Roboto', sans-serif;
+}
+body {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+}
+a {
+    text-decoration: none;
+}
+.callout {
+    margin-top: -15px;
+}
+.changelog {
+    margin-top: 50px;
+}
+.changelog .current {
+    margin-left: 20px;
+}
+.changelog .current .h4 {
+    margin-top: -5px;
+}
+.changelog .current ul {
+    margin-top: -20px;
+}

@@ -25,5 +25,8 @@
   "footer": {
     "title": "",
     "filename": "doc/footer.md"
+  },
+  "template": {
+    "forceLanguage": "en"
   }
 }

@@ -13,7 +13,7 @@
 </head>
 <body>
     <h2>AnoPay</h2>
-    <h5 class="callout">Anonymous API for cryptocurrency payement.</h5>
+    <h5 class="callout">Anonymous API for cryptocurrency payment.</h5>
 
     <p>To get started, check our <a href="/doc">documentation</a>.</p>
 

@@ -12,7 +12,7 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return view('home');
 });
 
 $router->group(['prefix' => 'api/v1', 'middleware' => 'auth'], function($app)
@@ -27,5 +27,6 @@ $router->group(['prefix' => 'api/v1', 'middleware' => 'auth'], function($app)
 
     $app->post('payments/payment', 'PaymentController@create');
     $app->get('payments/status/{payment_uuid}', 'PaymentController@status');
+    // $app->post('payments/status/{payment_uuid}', 'PaymentController@update');
     $app->get('payments/payment', 'PaymentController@getlist');
 });

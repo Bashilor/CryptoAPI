@@ -6,6 +6,7 @@ use App\Cryptocurrency;
 use App\Jobs\NewAPICall;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CryptocurrencyController extends Controller
 {
@@ -120,6 +121,10 @@ class CryptocurrencyController extends Controller
      */
     public function get($symbol)
     {
+        Validator::make(['symbol' => $symbol], [
+            'symbol' => 'required|string|exists:mysql.cryptocurrencies,symbol'
+        ])->validate();
+
         $cryptocurrency = Cryptocurrency::where('symbol', $symbol)->firstOrFail();
 
         return response()->json([
@@ -181,6 +186,10 @@ class CryptocurrencyController extends Controller
         $cryptocurrencies = [];
         foreach ($symbols as $symbol)
         {
+            Validator::make(['symbol' => $symbol], [
+                'symbol' => 'required|string|exists:mysql.cryptocurrencies,symbol'
+            ])->validate();
+
             $cryptocurrencies[] = Cryptocurrency::where('symbol', $symbol)->firstOrFail();
         }
 

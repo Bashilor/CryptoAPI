@@ -227,6 +227,10 @@ class PaymentController extends Controller
      */
     public function status(Request $request, $payment_uuid)
     {
+        Validator::make(['payment_uuid' => $payment_uuid], [
+            'payment_uuid' => 'required|string|exists:mysql.payments,uuid'
+        ])->validate();
+
         $payment = Payment::where('uuid', $payment_uuid)->firstOrFail();
         $payment->status = $payment->status == 1 ? "pending" : ($payment->status == 2 ? "confirmed" : "cancelled");
         $payment->amount = $payment->amount / 1e8;

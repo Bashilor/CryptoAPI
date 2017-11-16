@@ -4,6 +4,18 @@
   "description": "Documentation of AnoPay.",
   "title": "AnoPay - Documentation",
   "url" : "https://anopay.org",
+  "order": [
+    "Account",
+    "GetAccountBalance",
+    "CreateWithdraw",
+    "Cryptocurrency",
+    "GetCryptocurrencies",
+    "GetCryptocurrency",
+    "GetListCryptocurrency",
+    "Payment",
+    "CreatePayment",
+    "ListPayment"
+  ],
   "header": {
     "title": "Using the API",
     "filename": "doc/header.md"

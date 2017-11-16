@@ -36,7 +36,7 @@ class AccountController extends Controller
      * @usage : /api/v1/account/balance
      *
      * @apiGroup Account
-     * @apiName 1_GetAccountBalance
+     * @apiName GetAccountBalance
      * @apiVersion 1.0.0
      * @api {get}  /api/v1/account/balance Get balance
      * @apiDescription Used to get all of the user's balance.
@@ -98,7 +98,7 @@ class AccountController extends Controller
      * @usage : /api/v1/account/withdraw
      *
      * @apiGroup Account
-     * @apiName 2_CreateWithdraw
+     * @apiName CreateWithdraw
      * @apiVersion 1.0.0
      * @api {post}  /api/v1/account/withdraw Create withdraw
      * @apiDescription Used to create a withdraw identified by a unique ID (UUID v4).

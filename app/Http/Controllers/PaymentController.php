@@ -60,7 +60,7 @@ class PaymentController extends Controller
      * @usage : /payments/payment
      *
      * @apiGroup Payment
-     * @apiName 1_CreatePayment
+     * @apiName CreatePayment
      * @apiVersion 1.0.0
      * @api {post}  /api/v1/payments/payment Create payment
      * @apiDescription Used to create a payment identified by a unique ID (UUID v4).
@@ -138,10 +138,10 @@ class PaymentController extends Controller
      * @usage : /payments/payment
      *
      * @apiGroup Payment
-     * @apiName 2_ListPayment
+     * @apiName ListPayment
      * @apiVersion 1.0.0
      * @api {get}  /api/v1/payments/payment List payments
-     * @apiDescription Used to list payments create by the <a href="#api-Payment-1_CreatePayment">create payment</a> call and that are in any state. <br/> There is no way, at the moment, to filter the list of payments.
+     * @apiDescription Used to list payments create by the <a href="#api-Payment-CreatePayment">create payment</a> call and that are in any state. <br/> There is no way, at the moment, to filter the list of payments.
      * @apiHeader {String} Api-Token Your api-token.
      *
      * @apiExample {curl} Example usage:

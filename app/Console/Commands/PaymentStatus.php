@@ -6,7 +6,7 @@ use App\Cryptocurrency;
 use App\Jobs\SendPaymentNotification;
 use App\Payment;
 use App\UserBalance;
-use GuzzleHttp\Client;
+use JsonRpc\Client;
 use Illuminate\Console\Command;
 
 class PaymentStatus extends Command

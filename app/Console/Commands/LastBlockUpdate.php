@@ -51,11 +51,11 @@ class LastBlockUpdate extends Command
         $cryptocurrencies = Cryptocurrency::where('maintenance', false)->get();
         foreach ($cryptocurrencies as $cryptocurrency)
         {
-            $wallet_uri = 'http://'. $this->wallet_username .':'. $this->wallet_password .'@'. $this->wallet_ip_address .':'. $cryptocurrency->wallet_port .'/';
-            $client = new Client($wallet_uri);
-
             if($cryptocurrency->type == 'BITCOIN' || $cryptocurrency->type == 'BITCOINEX')
             {
+                $wallet_uri = 'http://'. $this->wallet_username .':'. $this->wallet_password .'@'. $this->wallet_ip_address .':'. $cryptocurrency->wallet_port .'/';
+                $client = new Client($wallet_uri);
+
                 $client->call('getblockcount', []);
                 $getBlockCount = json_decode($client->output)->result;
 
@@ -64,14 +64,14 @@ class LastBlockUpdate extends Command
 
                 $client->call('getblock', [$blockHash]);
                 $lastBlock = json_decode($client->output)->result->time;
+
+                $cryptocurrency->symbol == "NXS"
+                    ? $lastBlockUpdate = Carbon::parse($lastBlock)->toDateTimeString()
+                    : $lastBlockUpdate = Carbon::createFromTimestamp($lastBlock)->toDateTimeString();
+
+                $cryptocurrency->last_block_update = $lastBlockUpdate;
+                $cryptocurrency->save();
             }
-
-            $cryptocurrency->symbol == "NXS"
-                ? $lastBlockUpdate = Carbon::parse($lastBlock)->toDateTimeString()
-                : $lastBlockUpdate = Carbon::createFromTimestamp($lastBlock)->toDateTimeString();
-
-            $cryptocurrency->last_block_update = $lastBlockUpdate;
-            $cryptocurrency->save();
         }
     }
 }

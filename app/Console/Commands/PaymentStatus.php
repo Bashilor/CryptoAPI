@@ -58,20 +58,23 @@ class PaymentStatus extends Command
                 ['status', 1]
             ])->get();
 
-            $wallet_uri = 'http://'. $this->wallet_username .':'. $this->wallet_password .'@'. $this->wallet_ip_address .':'. $cryptocurrency->wallet_port .'/';
-            $client = new Client($wallet_uri);
-
             foreach ($payments as $payment)
             {
                 $balance = 0;
 
                 if($cryptocurrency->type == 'BITCOIN')
                 {
+                    $wallet_uri = 'http://'. $this->wallet_username .':'. $this->wallet_password .'@'. $this->wallet_ip_address .':'. $cryptocurrency->wallet_port .'/';
+                    $client = new Client($wallet_uri);
+
                     $client->call('getbalance', [$payment->uuid, $cryptocurrency->confirmations]);
                     $balance = json_decode($client->output)->result;
                 }
                 elseif ($cryptocurrency->type == 'BITCOINEX')
                 {
+                    $wallet_uri = 'http://'. $this->wallet_username .':'. $this->wallet_password .'@'. $this->wallet_ip_address .':'. $cryptocurrency->wallet_port .'/';
+                    $client = new Client($wallet_uri);
+
                     $client->call('z_getbalance', [$payment->payment_address, $cryptocurrency->confirmations]);
                     $balance = json_decode($client->output)->result;
                 }

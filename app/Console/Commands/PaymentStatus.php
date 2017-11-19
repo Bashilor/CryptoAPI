@@ -67,7 +67,7 @@ class PaymentStatus extends Command
                     $wallet_uri = 'http://'. $this->wallet_username .':'. $this->wallet_password .'@'. $this->wallet_ip_address .':'. $cryptocurrency->wallet_port .'/';
                     $client = new Client($wallet_uri);
 
-                    $client->call('getbalance', [$payment->uuid, $cryptocurrency->confirmations]);
+                    $client->call('getreceivedbyaddress', [$payment->payment_address, $cryptocurrency->confirmations]);
                     $balance = json_decode($client->output)->result;
                 }
                 elseif ($cryptocurrency->type == 'BITCOINEX')

@@ -44,12 +44,12 @@ class PaymentController extends Controller
 
         if($cryptocurrency->type == 'BITCOIN')
         {
-            $client->call('getnewaddress', [$uuid]);
+            $client->call('getnewaddress', []);
             $newAddress = json_decode($client->output)->result;
         }
         elseif ($cryptocurrency->type == 'BITCOINEX')
         {
-            $client->call('getnewaddress', []);
+            $client->call('z_getnewaddress', []);
             $newAddress = json_decode($client->output)->result;
         }
 

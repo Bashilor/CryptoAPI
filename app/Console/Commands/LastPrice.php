@@ -40,7 +40,7 @@ class LastPrice extends Command
     public function handle()
     {
         $client = new Client();
-        $response = $client->get('https://blockchain.info/fr/ticker');
+        $response = $client->get('https://www.blockchain.com/ticker');
 
         $response = json_decode($response->getBody()->getContents(), true);
 
